@@ -200,8 +200,8 @@ module ActiveAttr
         AttributeDefinition.new(name, options).tap do |attribute_definition|
           attribute_name = attribute_definition.name.to_s
           # Force active model to generate attribute methods
-          remove_instance_variable("@attribute_methods_generated") if instance_variable_defined?("@attribute_methods_generated")
-          define_attribute_methods([attribute_definition.name]) unless attribute_names.include? attribute_name
+          remove_instance_variable(:"@attribute_methods_generated") if instance_variable_defined?(:"@attribute_methods_generated")
+          define_attribute_method(attribute_definition.name) unless attribute_names.include? attribute_name
           attributes[attribute_name] = attribute_definition
         end
       end
